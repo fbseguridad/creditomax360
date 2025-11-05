@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/style.css">
+<title>CréditoMax360 Ultra</title>
+<script>
+let tips=["🎯 Crédito aprobado en minutos","💸 Ofertas únicas según tu perfil","🔥 Préstamos rápidos y confiables","💥 Tu dinero disponible hoy"];
+let tipIndex=0;
+function rotateTips(){
+  const t=document.getElementById('tip');
+  setInterval(()=>{
+    t.innerHTML='<a href="https://propellerads.com" target="_blank">'+tips[tipIndex%tips.length]+'</a>';
+    tipIndex++;
+  },4000);
+}
+
+let popups=["🎉 Crédito visible ahora!","💰 Oferta aprobada!","🔥 Solicita tu préstamo hoy!","💳 Beneficio instantáneo"];
+let popupIndex=0;
+function rotatePopups(){
+  const p=document.getElementById('popup');
+  setInterval(()=>{
+    p.innerText=popups[popupIndex%popups.length];
+    p.style.display='block';
+    setTimeout(()=>{p.style.display='none';},5000);
+    popupIndex++;
+  },7000);
+}
+
+function enableSubmit(){sessionStorage.setItem('shared','true');document.getElementById('submitBtn').disabled=false;alert("Gracias por compartir! Ahora puedes ver las ofertas.");}
+function checkShare(){if(sessionStorage.getItem('shared')==='true'){document.getElementById('submitBtn').disabled=false;} else {document.getElementById('submitBtn').disabled=true;}}
+
+window.onload=function(){rotateTips();rotatePopups();checkShare();};
+</script>
+</head>
+<body>
+<div class="container">
+<h1>CréditoMax360 Ultra</h1>
+<video autoplay muted loop><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+<p id="tip"></p>
+<form method="POST" action="/offers">
+<input type="text" name="nombre" placeholder="Nombre" required>
+<input type="text" name="apellido" placeholder="Apellido" required>
+<input type="text" name="dni" placeholder="DNI / Cédula" required>
+<input type="email" name="email" placeholder="Email" required>
+<input type="text" name="banco" placeholder="Banco" required>
+<button type="submit" id="submitBtn">Ver ofertas</button>
+</form>
+<p style="margin-top:10px;">Comparte para desbloquear:
+<a href="https://wa.me/?text=Visita%20CréditoMax360" target="_blank" onclick="enableSubmit()">WhatsApp</a> |
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://tusitio.com" target="_blank" onclick="enableSubmit()">Facebook</a> |
+<a href="https://t.me/share/url?url=https://tusitio.com&text=CréditoMax360" target="_blank" onclick="enableSubmit()">Telegram</a>
+</p>
+<div id="popup" class="popup"></div>
+<div class="sidebanner">Publicidad</div>
+</div>
+</body>
+</html>

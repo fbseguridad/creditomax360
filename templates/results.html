@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/style.css">
+<title>Ofertas - CréditoMax360 Ultra</title>
+<script>
+let contador=Math.floor(Math.random()*200+50);
+function incCounter(){contador++;document.getElementById('counter').innerText=contador+" créditos aprobados hoy";}
+setInterval(incCounter,4000);
+
+let popups=["🎯 Oferta visible ahora!","💸 Crédito aprobado rápido!","🔥 Solicita tu préstamo hoy!","💳 Beneficio instantáneo"];
+let popupIndex=0;
+function rotatePopups(){
+  const p=document.getElementById('popup');
+  setInterval(()=>{
+    p.innerText=popups[popupIndex%popups.length];
+    p.style.display='block';
+    setTimeout(()=>{p.style.display='none';},5000);
+    popupIndex++;
+  },7000);
+}
+
+function checkShare(){
+  if(sessionStorage.getItem('shared')==='true'){
+    document.getElementById('offersContainer').style.display='block';
+  } else {
+    document.getElementById('shareGate').style.display='block';
+  }
+}
+function unlockOffers(){sessionStorage.setItem('shared','true');document.getElementById('shareGate').style.display='none';document.getElementById('offersContainer').style.display='block';alert("¡Gracias por compartir! Aquí están tus ofertas.");}
+
+window.onload=function(){setInterval(incCounter,4000);rotatePopups();checkShare();};
+</script>
+</head>
+<body>
+<div class="container">
+<h2>Ofertas disponibles</h2>
+<p id="counter" class="counter">0 créditos aprobados hoy</p>
+
+<div id="shareGate" style="display:none; border:2px dashed #ff5722; padding:20px; border-radius:10px; margin-bottom:14px;">
+<p>Hemos encontrado un préstamo ideal para usted.<br>Comparte para acceder:</p>
+<a href="https://wa.me/?text=Préstamo%20ideal" target="_blank" onclick="unlockOffers()">WhatsApp</a> |
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://tusitio.com" target="_blank" onclick="unlockOffers()">Facebook</a> |
+<a href="https://t.me/share/url?url=https://tusitio.com&text=CréditoMax360" target="_blank" onclick="unlockOffers()">Telegram</a>
+</div>
+
+<div id="offersContainer" style="display:none;">
+<div class="card" onclick="window.open('https://propellerads.com','_blank')">
+  Préstamo rápido 1
+  <video autoplay muted loop><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+</div>
+<div class="card" onclick="window.open('https://propellerads.com','_blank')">
+  Préstamo rápido 2
+  <video autoplay muted loop><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+</div>
+<div class="card" onclick="window.open('https://propellerads.com','_blank')">
+  Préstamo rápido 3
+  <video autoplay muted loop><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+</div>
+<div class="card" onclick="window.open('https://propellerads.com','_blank')">
+  Préstamo rápido 4
+  <video autoplay muted loop><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+</div>
+
+<!-- Banner de propaganda al final -->
+<div class="sidebanner" style="position:relative; bottom:0; right:auto; margin-top:20px;">Publicidad</div>
+
+<div id="popup" class="popup"></div>
+</div> <!-- fin de offersContainer -->
+</div> <!-- fin container -->
+</body>
+</html>
